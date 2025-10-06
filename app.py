@@ -2,24 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-# ---------------------------------------------------
 # Flask App Configuration
-# ---------------------------------------------------
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
-# ---------------------------------------------------
 # Database Model
-# ---------------------------------------------------
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     complete = db.Column(db.Boolean, default=False)
 
-# ---------------------------------------------------
-# Routes
-# ---------------------------------------------------
 @app.route('/')
 def index():
     tasks = Task.query.all()
@@ -48,12 +41,10 @@ def delete(id):
     db.session.commit()
     return redirect(url_for('index'))
 
-# ---------------------------------------------------
-# Initialize Database Automatically
-# ---------------------------------------------------
+# Initialize Database Automatically After starting the app
 if __name__ == '__main__':
     if not os.path.exists('task.db'):
         with app.app_context():
             db.create_all()
-            print("✅ Database initialized successfully!")
+            print("Database initialized successfully!")
     app.run(debug=True)
