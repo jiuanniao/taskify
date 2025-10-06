@@ -1,0 +1,4 @@
+DEBUG = True
+SQLALCHEMY_DATABASE_URI = 'sqlite:///task.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SECRET_KEY = 'supersecretkey'
