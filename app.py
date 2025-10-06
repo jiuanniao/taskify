@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-# Flask App Configuration
+# My flask App Configuration
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
@@ -41,7 +41,7 @@ def delete(id):
     db.session.commit()
     return redirect(url_for('index'))
 
-# Initialize Database Automatically After starting the app
+# Initialize Database automatically After starting the app
 if __name__ == '__main__':
     if not os.path.exists('task.db'):
         with app.app_context():
